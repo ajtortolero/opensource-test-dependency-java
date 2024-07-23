@@ -22,21 +22,21 @@ jobs:
           java-version: '11'
           distribution: 'temurin' 
 
-      - name: Install Gradle
-        run: |
-          wget https://services.gradle.org/distributions/gradle-7.6-bin.zip
-          unzip gradle-7.6-bin.zip
-          sudo mv gradle-7.6 /opt/gradle
-          export PATH=$PATH:/opt/gradle/bin
-          gradle -v  # Verify installation
+      # - name: Install Gradle
+      #   run: |
+      #     wget https://services.gradle.org/distributions/gradle-7.6-bin.zip
+      #     unzip gradle-7.6-bin.zip
+      #     sudo mv gradle-7.6 /opt/gradle
+      #     export PATH=$PATH:/opt/gradle/bin
+      #     gradle -v  # Verify installation
 
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
 
-      - name: Temporarily add license-report plugin
-        run: |
-          echo "plugins { id 'com.github.jk1.dependency-license-report' version '1.16' }" >> build.gradle
-          echo "licenseReport { outputDir = '$buildDir/reports/dependency-license'; configurations = ['runtimeClasspath'] }" >> build.gradle
+      # - name: Temporarily add license-report plugin
+      #   run: |
+      #     echo "plugins { id 'com.github.jk1.dependency-license-report' version '1.16' }" >> build.gradle
+      #     echo "licenseReport { outputDir = '$buildDir/reports/dependency-license'; configurations = ['runtimeClasspath'] }" >> build.gradle
 
       - name: Build and generate license report
         run: ./gradlew build generateLicenseReport
