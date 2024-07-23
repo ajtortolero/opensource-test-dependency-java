@@ -16,8 +16,4 @@ plugins {
     id 'jacoco'
 }
 
-licenseReport { 
-    outputDir = '$buildDir/reports/dependency-license'; configurations = ['runtimeClasspath'] 
-}
-
 apply from: './main.gradle'
