@@ -1,0 +1,45 @@
+name: List Dependencies with Licenses
+
+on:
+  workflow_dispatch:
+
+# on:
+#   pull_request:
+#     branches:
+#       - trunk
+
+jobs:
+  list-dependencies:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Temporarily add license-report plugin
+        run: |
+          echo "plugins { id 'com.github.jk1.dependency-license-report' version '1.16' }" >> build.gradle
+          echo "licenseReport { outputDir = '$buildDir/reports/dependency-license'; configurations = ['runtimeClasspath'] }" >> build.gradle
+
+      - name: Build and generate license report
+        run: ./gradlew build generateLicenseReport
+
+      - name: Upload dependencies list with licenses
+        uses: actions/upload-artifact@v2
+        with:
+          name: dependencies
+          path: build/reports/dependency-license/dependency-license.xml
+
+      - name: Print XML file content
+        run: cat build/reports/dependency-license/dependency-license.xml
+
+      - name: Clean up build.gradle
+        run: git checkout -- build.gradle
