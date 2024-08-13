@@ -28,59 +28,14 @@ jobs:
       - name: Grant execution permissions for gradlew
         run: chmod +x ./gradlew        
 
-      # - name: Add License Report Plugin
-      #   run: |
-      #     # Inserta el bloque buildscript al principio del archivo build.gradle
-      #     sed -i '1s;^;buildscript {\n  repositories { mavenCentral() }\n  dependencies { classpath "com.github.jk1:gradle-license-report:1.16" }\n}\n\n;' build.gradle
-          
-      #     # Agrega el bloque plugins si no existe
-      #     if ! grep -q "plugins {" build.gradle; then
-      #       echo "plugins {" >> build.gradle
-      #       echo "}" >> build.gradle
-      #     fi
+      - name: Gradle Task
+        run: |
+            ./gradlew tasks
 
-      #     # Agrega la configuración del plugin License Report
-      #     echo "apply plugin: 'com.github.jk1.dependency-license-report'" >> build.gradle
-      #     echo "licenseReport {" >> build.gradle
-      #     echo "  outputDir = file('.')" >> build.gradle  # Ruta configurada a la raíz del repositorio
-      #     echo "  configurations = ['runtimeClasspath']" >> build.gradle
-      #     echo "}" >> build.gradle
-          
-      # - name: Print build.gradle
-      #   run: |
-      #     echo "Printing the modified build.gradle file:"
-      #     cat build.gradle
+      - name: Generate License Report Info
+        run: |
+            ./gradlew licenseReport --info
 
       - name: Generate License Report
         run: |
-            ./gradlew clean build licenseReport          
-      # - name: Install Gradle
-      #   run: |
-      #     wget https://services.gradle.org/distributions/gradle-7.6-bin.zip
-      #     unzip gradle-7.6-bin.zip
-      #     sudo mv gradle-7.6 /opt/gradle
-      #     export PATH=$PATH:/opt/gradle/bin
-      #     gradle -v  # Verify installation
-
-      # - name: Grant execute permission for gradlew
-      #   run: chmod +x ./gradlew
-
-      # - name: Temporarily add license-report plugin
-      #   run: |
-      #     echo "plugins { id 'com.github.jk1.dependency-license-report' version '1.16' }" >> build.gradle
-      #     echo "licenseReport { outputDir = '$buildDir/reports/dependency-license'; configurations = ['runtimeClasspath'] }" >> build.gradle
-
-      # - name: Build and generate license report
-      #   run: ./gradlew build generateLicenseReport
-
-      # - name: Upload dependencies list with licenses
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: dependencies
-      #     path: build/reports/dependency-license/dependency-license.xml
-
-      # - name: Print XML file content
-      #   run: cat build/reports/dependency-license/dependency-license.xml
-
-      # - name: Clean up build.gradle
-      #   run: git checkout -- build.gradle
+            ./gradlew clean build licenseReport
