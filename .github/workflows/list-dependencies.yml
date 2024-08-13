@@ -30,14 +30,16 @@ jobs:
 
       - name: Add License Report Plugin
         run: |
-          echo "buildscript {" >> build.gradle
-          echo "  repositories {" >> build.gradle
-          echo "    mavenCentral()" >> build.gradle
-          echo "  }" >> build.gradle
-          echo "  dependencies {" >> build.gradle
-          echo "    classpath 'com.github.jk1:gradle-license-report:1.16'" >> build.gradle
-          echo "  }" >> build.gradle
-          echo "}" >> build.gradle
+          # Inserta el bloque buildscript al principio del archivo build.gradle
+          sed -i '1s;^;buildscript {\n  repositories { mavenCentral() }\n  dependencies { classpath "com.github.jk1:gradle-license-report:1.16" }\n}\n\n;' build.gradle
+          
+          # Agrega el bloque plugins si no existe
+          if ! grep -q "plugins {" build.gradle; then
+            echo "plugins {" >> build.gradle
+            echo "}" >> build.gradle
+          fi
+
+          # Agrega la configuración del plugin License Report
           echo "apply plugin: 'com.github.jk1.dependency-license-report'" >> build.gradle
           echo "licenseReport {" >> build.gradle
           echo "  outputDir = file('.')" >> build.gradle  # Ruta configurada a la raíz del repositorio
