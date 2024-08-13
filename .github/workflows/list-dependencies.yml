@@ -38,4 +38,4 @@ jobs:
 
       - name: Generate License Report
         run: |
-            ./gradlew clean build licenseReport
+            ./gradlew clean build generateLicenseReport --info
