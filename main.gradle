@@ -60,16 +60,17 @@ jacoco {
 }
 
 licenseReport {
-    // renderers = [new InventoryHtmlReportRenderer('report.html', 'Backend')]
-    // filters = [new LicenseBundleNormalizer()]
-    // importers = [new XmlReportImporter('Front End', new File(project.projectDir, 'externalDependencies.xml'))]
+    renderers = [new InventoryHtmlReportRenderer('report.html', 'Backend')]
+    filters = [new LicenseBundleNormalizer()]
+    importers = [new XmlReportImporter('Front End', new File(project.projectDir, 'externalDependencies.xml'))]
+    configurations = ALL
     
-    outputDir = file("build/reports/dependency-license")
-    configurations = ['runtimeClasspath']
-    renderers = [
-        new XmlReportRenderer(),  // Renderizador para informes en formato XML
-        new CsvReportRenderer()   // Renderizador para informes en formato CSV
-    ]
+    // outputDir = file("build/reports/dependency-license")
+    // configurations = ['runtimeClasspath']
+    // renderers = [
+    //     new XmlReportRenderer(),  // Renderizador para informes en formato XML
+    //     new CsvReportRenderer()   // Renderizador para informes en formato CSV
+    // ]
 }
 
 tasks.register('jacocoMergedReport', JacocoReport) {
