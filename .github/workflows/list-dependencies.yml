@@ -34,7 +34,7 @@ jobs:
 
       - name: Generate License Report Info
         run: |
-            ./gradlew licenseReport --info
+            ./gradlew generateLicenseReport --info
 
       - name: Generate License Report
         run: |
