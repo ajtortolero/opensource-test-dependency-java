@@ -58,11 +58,15 @@ jacoco {
     toolVersion = "${jacocoVersion}"
     reportsDirectory.set(layout.buildDirectory.dir("reports"))
 }
-
+import com.github.jk1.license.render.XmlReportRenderer
+import com.github.jk1.license.render.CsvReportRenderer
 licenseReport {
     outputDir = file("build/reports/dependency-license")
     configurations = ['runtimeClasspath']
-    renderers = ['xml', 'csv'] 
+    renderers = [
+        new XmlReportRenderer(),  // Renderizador para informes en formato XML
+        new CsvReportRenderer()   // Renderizador para informes en formato CSV
+    ]
 }
 
 tasks.register('jacocoMergedReport', JacocoReport) {
