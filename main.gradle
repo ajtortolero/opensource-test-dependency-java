@@ -59,8 +59,9 @@ jacoco {
     reportsDirectory.set(layout.buildDirectory.dir("reports"))
 }
 
-licenseReport { 
-    outputDir = 'reports/dependency-license'; configurations = ['runtimeClasspath'] 
+licenseReport {
+  outputDir = file('.')
+  configurations = ['runtimeClasspath']
 }
 
 tasks.register('jacocoMergedReport', JacocoReport) {
