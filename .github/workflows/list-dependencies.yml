@@ -14,14 +14,29 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Set up JDK
-        uses: actions/setup-java@v2
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'temurin' 
+          distribution: 'temurin'
 
+      - name: Set up Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Add License Report Plugin
+        run: |
+          echo "apply plugin: 'com.github.jk1.dependency-license-report'" >> build.gradle
+          echo "licenseReport {" >> build.gradle
+          echo "  outputDir = file('.')" >> build.gradle  # Ruta configurada a la raíz del repositorio
+          echo "  configurations = ['runtimeClasspath']" >> build.gradle
+          echo "}" >> build.gradle
+          
+      - name: Print build.gradle
+        run: |
+          echo "Printing the modified build.gradle file:"
+          cat build.gradle
       # - name: Install Gradle
       #   run: |
       #     wget https://services.gradle.org/distributions/gradle-7.6-bin.zip
@@ -30,25 +45,25 @@ jobs:
       #     export PATH=$PATH:/opt/gradle/bin
       #     gradle -v  # Verify installation
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x ./gradlew
+      # - name: Grant execute permission for gradlew
+      #   run: chmod +x ./gradlew
 
       # - name: Temporarily add license-report plugin
       #   run: |
       #     echo "plugins { id 'com.github.jk1.dependency-license-report' version '1.16' }" >> build.gradle
       #     echo "licenseReport { outputDir = '$buildDir/reports/dependency-license'; configurations = ['runtimeClasspath'] }" >> build.gradle
 
-      - name: Build and generate license report
-        run: ./gradlew build generateLicenseReport
+      # - name: Build and generate license report
+      #   run: ./gradlew build generateLicenseReport
 
-      - name: Upload dependencies list with licenses
-        uses: actions/upload-artifact@v2
-        with:
-          name: dependencies
-          path: build/reports/dependency-license/dependency-license.xml
+      # - name: Upload dependencies list with licenses
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: dependencies
+      #     path: build/reports/dependency-license/dependency-license.xml
 
-      - name: Print XML file content
-        run: cat build/reports/dependency-license/dependency-license.xml
+      # - name: Print XML file content
+      #   run: cat build/reports/dependency-license/dependency-license.xml
 
-      - name: Clean up build.gradle
-        run: git checkout -- build.gradle
+      # - name: Clean up build.gradle
+      #   run: git checkout -- build.gradle
