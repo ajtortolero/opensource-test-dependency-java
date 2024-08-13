@@ -1,6 +1,6 @@
 allprojects {
     repositories {
-        maven {url "https://artifactory.apps.bancolombia.com:443/maven-bancolombia"}
+        mavenCentral()
     }
 }
 
