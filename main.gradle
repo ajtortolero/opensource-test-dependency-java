@@ -62,7 +62,7 @@ jacoco {
 licenseReport {
     outputDir = file("build/reports/dependency-license")
     configurations = ['runtimeClasspath']
-    renderers = [new com.github.jk1.gradle.license.CsvReportRenderer()]
+    renderers = ['xml', 'csv'] 
 }
 
 tasks.register('jacocoMergedReport', JacocoReport) {
