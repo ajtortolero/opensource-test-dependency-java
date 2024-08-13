@@ -45,4 +45,4 @@ jobs:
             ./gradlew clean build generateLicenseReport --info
 
       - name: Print XML file content
-        run: ls build/reports/dependency-license/ -l
+        run: cat build/reports/dependency-license/index.html
