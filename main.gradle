@@ -16,7 +16,12 @@ subprojects {
         useJUnitPlatform()
     }
 
-    dependencies {
+        dependencies {
+        implementation 'org.springframework:spring-context'
+        implementation 'org.springframework.boot:spring-boot-starter'
+        implementation 'software.amazon.awssdk:s3'
+        implementation group: 'software.amazon.awssdk', name: 's3control', version: '2.17.267'
+        testImplementation group: 'org.mockito', name: 'mockito-inline', version: '4.7.0'
         implementation 'io.projectreactor:reactor-core'
         implementation 'io.projectreactor.addons:reactor-extra'
 
