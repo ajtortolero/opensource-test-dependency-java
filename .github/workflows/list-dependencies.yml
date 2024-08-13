@@ -32,10 +32,17 @@ jobs:
         run: |
             ./gradlew tasks
 
-      - name: Generate License Report Info
+      # - name: Generate License Report Info
+      #   run: |
+      #       ./gradlew generateLicenseReport --info
+
+      - name: Clean License Report
         run: |
-            ./gradlew generateLicenseReport --info
+            ./gradlew clean --info
 
       - name: Generate License Report
         run: |
             ./gradlew clean build generateLicenseReport --info
+
+      - name: Print XML file content
+        run: ls build/reports/dependency-license/ -l
