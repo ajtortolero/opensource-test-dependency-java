@@ -62,6 +62,7 @@ jacoco {
 licenseReport {
     outputDir = file("build/reports/dependency-license")
     configurations = ['runtimeClasspath']
+    renderers = [new XmlReportRenderer(), new CsvReportRenderer()]
 }
 
 tasks.register('jacocoMergedReport', JacocoReport) {
