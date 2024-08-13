@@ -59,11 +59,6 @@ jacoco {
     reportsDirectory.set(layout.buildDirectory.dir("reports"))
 }
 
-licenseReport {
-  outputDir = file('.')
-  configurations = ['runtimeClasspath']
-}
-
 tasks.register('jacocoMergedReport', JacocoReport) {
     dependsOn = [test, subprojects.jacocoTestReport]
     additionalSourceDirs.setFrom files(subprojects.sourceSets.main.allSource.srcDirs)
