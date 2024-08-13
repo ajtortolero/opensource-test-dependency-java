@@ -25,6 +25,9 @@ jobs:
       - name: Set up Gradle
         uses: gradle/gradle-build-action@v2
 
+      - name: Grant execution permissions for gradlew
+        run: chmod +x ./gradlew        
+
       - name: Add License Report Plugin
         run: |
           echo "apply plugin: 'com.github.jk1.dependency-license-report'" >> build.gradle
