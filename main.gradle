@@ -60,8 +60,8 @@ jacoco {
 }
 
 licenseReport {
-  outputDir = file('.')
-  configurations = ['runtimeClasspath']
+    outputDir = file("build/reports/dependency-license")
+    configurations = ['runtimeClasspath']
 }
 
 tasks.register('jacocoMergedReport', JacocoReport) {
