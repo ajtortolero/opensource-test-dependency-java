@@ -58,8 +58,7 @@ jacoco {
     toolVersion = "${jacocoVersion}"
     reportsDirectory.set(layout.buildDirectory.dir("reports"))
 }
-import com.github.jk1.license.render.XmlReportRenderer
-import com.github.jk1.license.render.CsvReportRenderer
+
 licenseReport {
     outputDir = file("build/reports/dependency-license")
     configurations = ['runtimeClasspath']
