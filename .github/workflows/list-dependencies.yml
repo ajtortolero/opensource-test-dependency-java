@@ -28,23 +28,23 @@ jobs:
       - name: Grant execution permissions for gradlew
         run: chmod +x ./gradlew        
 
-      - name: Add License Report Plugin
-        run: |
-          # Inserta el bloque buildscript al principio del archivo build.gradle
-          sed -i '1s;^;buildscript {\n  repositories { mavenCentral() }\n  dependencies { classpath "com.github.jk1:gradle-license-report:1.16" }\n}\n\n;' build.gradle
+      # - name: Add License Report Plugin
+      #   run: |
+      #     # Inserta el bloque buildscript al principio del archivo build.gradle
+      #     sed -i '1s;^;buildscript {\n  repositories { mavenCentral() }\n  dependencies { classpath "com.github.jk1:gradle-license-report:1.16" }\n}\n\n;' build.gradle
           
-          # Agrega el bloque plugins si no existe
-          if ! grep -q "plugins {" build.gradle; then
-            echo "plugins {" >> build.gradle
-            echo "}" >> build.gradle
-          fi
+      #     # Agrega el bloque plugins si no existe
+      #     if ! grep -q "plugins {" build.gradle; then
+      #       echo "plugins {" >> build.gradle
+      #       echo "}" >> build.gradle
+      #     fi
 
-          # Agrega la configuración del plugin License Report
-          echo "apply plugin: 'com.github.jk1.dependency-license-report'" >> build.gradle
-          echo "licenseReport {" >> build.gradle
-          echo "  outputDir = file('.')" >> build.gradle  # Ruta configurada a la raíz del repositorio
-          echo "  configurations = ['runtimeClasspath']" >> build.gradle
-          echo "}" >> build.gradle
+      #     # Agrega la configuración del plugin License Report
+      #     echo "apply plugin: 'com.github.jk1.dependency-license-report'" >> build.gradle
+      #     echo "licenseReport {" >> build.gradle
+      #     echo "  outputDir = file('.')" >> build.gradle  # Ruta configurada a la raíz del repositorio
+      #     echo "  configurations = ['runtimeClasspath']" >> build.gradle
+      #     echo "}" >> build.gradle
           
       - name: Print build.gradle
         run: |
