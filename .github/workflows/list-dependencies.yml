@@ -37,6 +37,10 @@ jobs:
         run: |
           echo "Printing the modified build.gradle file:"
           cat build.gradle
+
+      - name: Generate License Report
+        run: |
+            ./gradlew clean build licenseReport          
       # - name: Install Gradle
       #   run: |
       #     wget https://services.gradle.org/distributions/gradle-7.6-bin.zip
