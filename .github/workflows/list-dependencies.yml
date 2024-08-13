@@ -36,9 +36,9 @@ jobs:
       #   run: |
       #       ./gradlew generateLicenseReport --info
 
-      - name: Clean License Report
-        run: |
-            ./gradlew clean --info
+      # - name: Clean License Report
+      #   run: |
+      #       ./gradlew clean --info
 
       - name: Generate License Report
         run: |
